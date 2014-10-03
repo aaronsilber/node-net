@@ -3,16 +3,16 @@
  *
  * example usage:
  * var miner = require('./amazon-miner.js');
- * miner('B004TSK9TG', function(arr){ console.log(arr); });
+ * miner.getFrequentlyBought('B004TSK9TG', function(arr){ console.log(arr); });
  *
  * returns null if page has no available "frequently bought together" links
- * returns an array with 2-3 other ID's corresponding to the "fbt" items
+ * returns an array with 1-2 other ID's corresponding to the "fbt" items
  */
 
 var http = require('http');
 var matches = []; //internal storage for matched itemId's
 
-module.exports = function(itemId, callback) {
+module.exports.getFrequentlyBought = function(itemId, callback) {
     function chunkReceived(chunk) {
         //regex to match "frequently bought together" links, and store ID in a backreference
         var regex = /(?:fbt_[yz]_img\">\s*<a href=\").+dp\/([A-Z0-9]+)\/[a-z0-9\/=_-]+\"/g;
